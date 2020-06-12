@@ -12,6 +12,7 @@ namespace RestaurantApp
     {
         static void Main(string[] args)
         {
+            RestaurantCRUD crud = new RestaurantCRUD();
             bool spin = true;
 
             while (spin == true)
@@ -30,14 +31,14 @@ namespace RestaurantApp
                     case "1":
                         
                         break;
-                    case "2":
-                      
+                    case "2":    
+                        crud.ReadOrder();
                         break;
                     case "3":
-                       
+                        crud.ReadAllOrders();
                         break;
                     case "4":
-                      
+                        crud.UpdateOrder();
                         break;
                     case "5":
                         
