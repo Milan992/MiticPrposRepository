@@ -12,14 +12,7 @@ namespace RestaurantApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("miticmilan");
-            Console.WriteLine("Prpos Boris");
-            Console.WriteLine("miticmilan");
-            Console.WriteLine("Prpos Boris");
-            Console.WriteLine("miticmilan");
-            Console.WriteLine("Prpos Boris");
-            Console.WriteLine("miticmilan");
-            Console.WriteLine("Prpos Boris");
+            Console.WriteLine("plezr");
         }
     }
 }
