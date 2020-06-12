@@ -52,6 +52,7 @@ namespace RestaurantApp
 
                         case "3":
                             Console.WriteLine("Please enter the amount of sandwiches you want to order");
+                            Console.WriteLine("plezr 3");
                             break;
 
                         case "4":
