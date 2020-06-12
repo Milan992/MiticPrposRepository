@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,7 @@ namespace RestaurantApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("nesto");
-            Console.WriteLine("nesto");
+            Console.WriteLine("miticmilan");
         }
     }
 }
