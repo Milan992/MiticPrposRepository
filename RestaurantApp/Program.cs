@@ -16,6 +16,7 @@ namespace RestaurantApp
 
             while (spin == true)
             {
+                Console.WriteLine("\tWELCOME\n");
                 Console.WriteLine("1. Create order:");
                 Console.WriteLine("2. Read order:");
                 Console.WriteLine("3. Read all orders:");
@@ -24,11 +25,12 @@ namespace RestaurantApp
                 Console.WriteLine("6. Exit:");
 
                 string pick = Console.ReadLine();
+                RestaurantCRUD restaurant = new RestaurantCRUD();
 
                 switch (pick)
                 {
                     case "1":
-                        
+                        restaurant.CreateOrder();
                         break;
                     case "2":
                       
@@ -40,7 +42,7 @@ namespace RestaurantApp
                       
                         break;
                     case "5":
-                        
+                        restaurant.DeleteOrder();
                         break;
                     case "6":
                         spin = false;
