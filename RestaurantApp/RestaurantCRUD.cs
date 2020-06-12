@@ -9,11 +9,16 @@ namespace RestaurantApp
 {
     class RestaurantCRUD
     {
-     RestaurantMiticPrposEntities context = new RestaurantMiticPrposEntities();
+        RestaurantMiticPrposEntities context = new RestaurantMiticPrposEntities();
 
         public void CreateOrder()
         {
+            while (true)
+            {
+                Console.WriteLine("Plese choose your meal");
 
+      
+            }
         }
 
         public void DeleteOrde()
