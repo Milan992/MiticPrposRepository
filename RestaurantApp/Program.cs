@@ -12,7 +12,7 @@ namespace RestaurantApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("plezr");
+            Console.WriteLine("faking plezr");
         }
     }
 }
