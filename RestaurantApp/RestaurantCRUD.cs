@@ -14,9 +14,20 @@ namespace RestaurantApp
 
         public void CreateOrder()
         {
-            while (true)
+            bool a = true;
+            while (a)
             {
                 bool menu = true;
+
+                int piz = 0;
+                int pas = 0;
+                int chi = 0;
+                int san = 0;
+                int sou = 0;
+
+                tblMenu chosen = new tblMenu();
+                tblOrder order = new tblOrder();
+
                 while (menu)
                 {
 
@@ -35,47 +46,99 @@ namespace RestaurantApp
                     {
                         case "1":
                             string amountPizza = "";
-                            while (!int.TryParse(amountPizza, out int i))
+                            while (!int.TryParse(amountPizza, out piz))
                             {
                                 Console.WriteLine("Please enter the amount of pizzas you want to order");
                                 amountPizza = Console.ReadLine();
+                                if (!int.TryParse(amountPizza, out piz))
+                                {
+                                    Console.WriteLine("Please enter only number.");
+                                }
                             }
                             break;
 
                         case "2":
                             string amountChicken = "";
-                            while (!int.TryParse(amountChicken, out int i))
+                            while (!int.TryParse(amountChicken, out chi))
                             {
                                 Console.WriteLine("Please enter the amount of chicken you want to order");
                                 amountChicken = Console.ReadLine();
+                                if (!int.TryParse(amountChicken, out chi))
+                                {
+                                    Console.WriteLine("Please enter only number.");
+                                }
                             }
                             break;
 
                         case "3":
-                            Console.WriteLine("Please enter the amount of sandwiches you want to order");
-                            Console.WriteLine("plezr 3");
+                            string amountSandwich = "";
+                            while (!int.TryParse(amountSandwich, out san))
+                            {
+                                Console.WriteLine("Please enter the amount of sandwiches you want to order");
+                                amountSandwich = Console.ReadLine();
+                                if (!int.TryParse(amountSandwich, out san))
+                                {
+                                    Console.WriteLine("Please enter only number.");
+                                }
+                            }
                             break;
 
                         case "4":
-                            Console.WriteLine("Please enter the amount of pastas you want to order");
+                            string amountPasta = "";
+                            while (!int.TryParse(amountPasta, out pas))
+                            {
+                                Console.WriteLine("Please enter the amount of pastas you want to order");
+                                amountPasta = Console.ReadLine();
+                                if (!int.TryParse(amountPasta, out pas))
+                                {
+                                    Console.WriteLine("Please enter only number.");
+                                }
+                            }
                             break;
 
                         case "5":
-                            Console.WriteLine("Please enter the amount of pizzas you want to order");
+                            string amountSoup = "";
+                            while (!int.TryParse(amountSoup, out sou))
+                            {
+                                Console.WriteLine("Please enter the amount of soups you want to order");
+                                amountSoup = Console.ReadLine();
+                                if (!int.TryParse(amountSoup, out sou))
+                                {
+                                    Console.WriteLine("Please enter only number.");
+                                }
+                            }
                             break;
 
                         case "6":
                             menu = false;
+                            Random random = new Random();
+                            chosen.Pizza = piz;
+                            chosen.Chicken = chi;
+                            chosen.Sandwich = san;
+                            chosen.Pasta = pas;
+                            chosen.Soup = sou;
+                            context.tblMenus.Add(chosen);
+                            context.SaveChanges();
+
+                            order.MenuID = chosen.MenuID;
+                            order.OrderTime = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd"), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                            order.OrderNumber = random.Next(1000, 9999);
+                            context.tblOrders.Add(order);
+                            context.SaveChanges();
+
+                            Console.WriteLine("\nYour order number is {0}", order.OrderNumber);
+                            break;
+
+                        case "7":
+                            menu = false;
+                            a = false;
                             break;
                     }
                 }
+             
             }
         }
 
-        public void DeleteOrde()
-        {
-
-        }
 
         public void ReadOrder()
         {
@@ -145,31 +208,31 @@ namespace RestaurantApp
         {
             while (true)
             {
-            bool isIn = false;
-            Console.WriteLine("Enter order number for order you want to update:");
-            int orderNumber;
-            bool tryHowMany = Int32.TryParse(Console.ReadLine(), out orderNumber);
-            while (!tryHowMany || orderNumber < 1)
-            {
-                Console.WriteLine("Incorrect input, please try again:");
-                tryHowMany = Int32.TryParse(Console.ReadLine(), out orderNumber);
-            }
-            //Putting numbers from table to list
-            List<tblOrder> listOfOrders = context.tblOrders.ToList();
-
-            //looking for number in list
-            for (int i = 0; i < listOfOrders.Count; i++)
-            {
-                // in case that number exists
-                if (listOfOrders[i].OrderNumber == orderNumber)
+                bool isIn = false;
+                Console.WriteLine("Enter order number for order you want to update:");
+                int orderNumber;
+                bool tryHowMany = Int32.TryParse(Console.ReadLine(), out orderNumber);
+                while (!tryHowMany || orderNumber < 1)
                 {
-                    tblOrder viaOrder = listOfOrders[i];
-                    tblMenu viaMenu = context.tblMenus.Where(x => x.MenuID == viaOrder.MenuID).Select(x => x).First();
-                    isIn = true;
-                    Console.WriteLine("\nOrder date:{0}\nOrder number:{1}\nPizza number:{2}\nChicken number:{3}\nPasta number:{4}\nSoup number:{5}\nSandwich number:{6}\n", viaOrder.OrderTime, viaOrder.OrderNumber, viaMenu.Pizza, viaMenu.Chicken, viaMenu.Pasta, viaMenu.Soup, viaMenu.Sandwich);
-
+                    Console.WriteLine("Incorrect input, please try again:");
+                    tryHowMany = Int32.TryParse(Console.ReadLine(), out orderNumber);
                 }
-            }
+                //Putting numbers from table to list
+                List<tblOrder> listOfOrders = context.tblOrders.ToList();
+
+                //looking for number in list
+                for (int i = 0; i < listOfOrders.Count; i++)
+                {
+                    // in case that number exists
+                    if (listOfOrders[i].OrderNumber == orderNumber)
+                    {
+                        tblOrder viaOrder = listOfOrders[i];
+                        tblMenu viaMenu = context.tblMenus.Where(x => x.MenuID == viaOrder.MenuID).Select(x => x).First();
+                        isIn = true;
+                        Console.WriteLine("\nOrder date:{0}\nOrder number:{1}\nPizza number:{2}\nChicken number:{3}\nPasta number:{4}\nSoup number:{5}\nSandwich number:{6}\n", viaOrder.OrderTime, viaOrder.OrderNumber, viaMenu.Pizza, viaMenu.Chicken, viaMenu.Pasta, viaMenu.Soup, viaMenu.Sandwich);
+
+                    }
+                }
                 //if number does not exists
                 if (isIn == false)
                 {
@@ -279,5 +342,31 @@ namespace RestaurantApp
                 }
             }
         }
+            public void DeleteOrder()
+            {
+                Console.WriteLine("\nPlease enter the number of an order you want to delete");
+                string d = Console.ReadLine();
+                int orderNumberToDelete;
+
+                try
+                {
+                    int.TryParse(d, out orderNumberToDelete);
+                    tblOrder orderToDelete = context.tblOrders.Where(x => x.OrderNumber == orderNumberToDelete).Select(x => x).FirstOrDefault();
+                    context.tblOrders.Remove(orderToDelete);
+
+                    tblMenu menuToDelete = context.tblMenus.Where(x => x.MenuID == orderToDelete.MenuID).Select(x => x).FirstOrDefault();
+                    context.tblMenus.Remove(menuToDelete);
+                    context.SaveChanges();
+
+                    Console.WriteLine("\nOrder delete succesfull.\n");
+                }
+                catch
+                {
+                    Console.WriteLine("\nOrder delete not succesfull. Order with a number you have just entered does not exist.\n");
+                }
+
+            }
+
+        }
     }
-}
+
