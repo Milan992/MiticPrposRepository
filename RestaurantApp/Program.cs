@@ -10,7 +10,8 @@ namespace RestaurantApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("end");
+            Console.WriteLine("nesto");
+            Console.WriteLine("nesto");
         }
     }
 }
